@@ -1,8 +1,10 @@
 "use client";
 
 import Button from "@/components/Button";
+import Footer from "@/components/Footer";
 import { changeUserPassword } from "@/firebase/firebaseService";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function ProfilePage() {
@@ -12,12 +14,15 @@ export default function ProfilePage() {
   const [message, setMessage] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const pathname = usePathname();
+  const cleanPath = pathname.split("/").slice(2).join("/");
+
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
 
     if (newPassword !== confirmPassword) {
-      setMessage("❌ Passwords do not match.");
+      setMessage("Passwords do not match.");
       return;
     }
 
@@ -28,11 +33,10 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="container-fluid bg-light min-vh-100">
-      <div className="row">
-        <div className="col-md-3 bg-white vh-100 px-0 border-end">
-          {/* Mobile toggle button */}
-          <div className="d-flex d-md-none justify-content-between align-items-center px-3 py-3 border-bottom">
+    <div className="bg-light min-vh-100 mt-5">
+      <div className="row g-0">
+        <div className="col-md-3 bg-white px-0 border-end">
+          <div className="d-flex d-md-none justify-content-between align-items-center p-5">
             <div className="d-flex align-items-center gap-2">
               <Image
                 src="/pp.jpg"
@@ -51,13 +55,12 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* Sidebar content */}
           <div
             className={`${
-              menuOpen ? "d-block" : "d-none"
-            } d-md-block bg-white p-3`}
+              menuOpen ? "d-flex" : "d-none"
+            } d-md-flex flex-column align-items-center justify-content-center p-3 profile-settings-box`}
           >
-            <div className="text-center mb-4 d-none d-md-block">
+            <div className="text-center mb-4 d-none d-md-block w-100">
               <Image
                 src="/pp.jpg"
                 alt="profile"
@@ -69,41 +72,53 @@ export default function ProfilePage() {
               <p className="text-muted small">petersonkenn@demo.com</p>
             </div>
 
-            <ul className="nav flex-column">
-              <li className="nav-item mb-2">
-                <a className="nav-link fs-5 text-dark d-flex align-items-center gap-2" href="#">
-                  👤 User Profile
+            <ul className="nav flex-column w-100 align-items-center">
+              <li className="nav-item mb-2 w-75">
+                <a
+                  className={`nav-link fs-3 d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${
+                    cleanPath === "settings/wallet"
+                      ? "bg-primary text-white"
+                      : "text-dark"
+                  }`}
+                  href="/settings/wallet"
+                >
+                  <Image src="/user.svg" alt="wallet" width={24} height={24} />
+                  Wallet
                 </a>
               </li>
-              <li className="nav-item mb-2">
-                <a className="nav-link fs-5 text-dark d-flex align-items-center gap-2" href="#">
-                  📣 Referrals
-                </a>
-              </li>
-              <li className="nav-item mb-2">
-                <a className="nav-link fs-5 text-dark d-flex align-items-center gap-2" href="#">
-                  🔑 API Keys
-                </a>
-              </li>
-              <li className="nav-item mb-2">
-                <a className="nav-link fs-5 text-dark d-flex align-items-center gap-2" href="#">
-                  🕓 Login History
-                </a>
-              </li>
-              <li className="nav-item mb-2">
-                <a className="nav-link active bg-primary text-white rounded-pill fs-5 d-flex align-items-center gap-2" href="#">
-                  🔒 Change Password
+              <li className="nav-item mb-2 w-75">
+                <a
+                  className={`nav-link fs-3 d-flex align-items-center gap-2 rounded-pill px-3 py-2 ${
+                    cleanPath === "settings/change-password"
+                      ? "bg-primary text-white"
+                      : "text-dark"
+                  }`}
+                  href="/settings/change-password"
+                >
+                  <Image
+                    src="/change-password.svg"
+                    alt="wallet"
+                    width={24}
+                    height={24}
+                  />
+                  Change Password
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="col-md-9 p-5 d-flex flex-column align-items-start justify-content-center bg-white">
-          <h3 className="mb-4 fs-1 fw-bold">Change Password</h3>
-          <form onSubmit={handleChangePassword} className="w-75">
-            <div className="mb-3">
+        <div
+          className="col-md-9 p-4 p-md-5 d-flex align-items-center justify-content-center flex-column gap-4 bg-white"
+          style={{ minHeight: "50vh" }}
+        >
+          <h3 className="fs-1 fw-bold">Change Password</h3>
+
+          <form
+            onSubmit={handleChangePassword}
+            className="w-100 d-flex flex-column gap-3"
+          >
+            <div>
               <label htmlFor="newPassword" className="form-label">
                 New Password
               </label>
@@ -117,7 +132,7 @@ export default function ProfilePage() {
                 required
               />
             </div>
-            <div className="mb-3">
+            <div>
               <label htmlFor="confirmPassword" className="form-label">
                 Confirm New Password
               </label>
@@ -131,15 +146,20 @@ export default function ProfilePage() {
                 required
               />
             </div>
-            <Button type="submit" className="btn-primary text-white fs-4" disabled={loading}>
+            <Button
+              type="submit"
+              className="btn-primary text-white fs-4"
+              disabled={loading}
+            >
               {loading ? "Updating..." : "Update Password"}
             </Button>
             {message && (
-              <div className="alert alert-info mt-3 w-100">{message}</div>
+              <div className="alert alert-info mt-1 w-100">{message}</div>
             )}
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Button from "./Button";
 import Link from "next/link";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { app } from "@/firebase/firebase";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -135,18 +136,7 @@ function Navbar() {
                 />
               </a>
             </li>
-            <li className="nav-item d-flex align-items-center">
-              <a className="nav-link" href="#">
-                EN/USD
-                <Image
-                  src="/arrow-down.svg"
-                  alt="arrow"
-                  width={10}
-                  height={10}
-                  className="ms-1"
-                />
-              </a>
-            </li>
+            <LanguageSwitcher/>
 
             <li className="nav-item d-flex align-items-center d-none d-xl-flex">
               <a className="nav-link" href="#">
@@ -172,7 +162,11 @@ function Navbar() {
               </a>
             </li>
           </ul>
-          <Button className="btn-white border border-black d-none d-xl-flex" py="py-1" px="px-2">
+          <Button
+            className="btn-white border border-black d-none d-xl-flex"
+            py="py-1"
+            px="px-2"
+          >
             Wallet
           </Button>
           {currentUser ? (
@@ -190,7 +184,7 @@ function Navbar() {
 
               <ul className="dropdown-menu dropdown-menu-end fs-4 mt-3">
                 <li>
-                  <Link className="dropdown-item" href="/settings">
+                  <Link className="dropdown-item" href="/settings/wallet">
                     Profile
                   </Link>
                 </li>

@@ -209,7 +209,7 @@ export const tradeCrypto = async (
 
   return {
     success: true,
-    message: `${fromCurrent} ${from} ile ${toCurrent} ${to} alındı.`,
+    message: "İşlem başarılı.",
   };
 };
 export const changeUserPassword = async (newPassword: string): Promise<{ success: boolean; message: string }> => {

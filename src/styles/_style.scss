@@ -156,7 +156,7 @@
   }
 
   .phone-container {
-    height: 100%;
+    height: auto;
     min-height: 400px;
   }
 
@@ -252,7 +252,7 @@
 
 .market-update-section {
   .market-update-title {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
   }
   .coin-item {
@@ -538,5 +538,16 @@
 .auth-padding {
   @media (max-width: 768px) {
     padding-top: 10rem;
+  }
+}
+.dropdown-scroll {
+  max-height: 300px; 
+  overflow-y: auto;
+}
+.profile-settings-box {
+  height: auto; 
+
+  @media (min-width: 768px) {
+    height: 100vh; 
   }
 }
