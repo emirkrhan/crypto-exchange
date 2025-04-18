@@ -103,9 +103,9 @@ export const SignIn = async (
     return userCredential.user;
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error("❌ Firebase kayıt hatası:", error.message);
+      console.log("Firebase kayıt hatası:", error.message);
     } else {
-      console.error("❌ Firebase kayıt hatası: Bilinmeyen bir hata oluştu.", error);
+      console.log("Firebase kayıt hatası: Bilinmeyen bir hata oluştu.", error);
     }
     throw error;
   }

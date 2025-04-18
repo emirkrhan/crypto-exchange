@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import { changeUserPassword, getUserWallet } from "@/firebase/firebaseService";
 import useCryptoStore from "@/store/useCryptoStore";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ export default function ProfilePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const wallet = useCryptoStore((state) => state.wallet);
   const setWallet = useCryptoStore((state) => state.setWallet);
+  const t = useTranslations()
 
   useEffect(() => {
     const fetchWallet = async () => {
@@ -93,7 +95,7 @@ export default function ProfilePage() {
                   href="/settings/wallet"
                 >
                   <Image src="/user.svg" alt="wallet" width={24} height={24} />
-                  Wallet
+                  {t("Wallet")}
                 </a>
               </li>
               <li className="nav-item mb-2 w-75">
@@ -111,7 +113,7 @@ export default function ProfilePage() {
                     width={24}
                     height={24}
                   />
-                  Change Password
+                  {t("Change Password")}
                 </a>
               </li>
             </ul>
@@ -122,14 +124,14 @@ export default function ProfilePage() {
           className="col-md-9 p-4 p-md-5 d-flex align-items-start justify-content-start flex-column gap-4 bg-white"
           style={{ minHeight: "50vh" }}
         >
-          <h3 className="fs-1 fw-bold">Wallet</h3>
+          <h3 className="fs-1 fw-bold">{t("Wallet")}</h3>
 
           <table className="table align-middle">
             <thead>
               <tr>
                 <th scope="col">Coin</th>
                 <th scope="col" className="text-end">
-                  Amount
+                  {t("Amount")}
                 </th>
               </tr>
             </thead>

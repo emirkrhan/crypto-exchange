@@ -1,5 +1,4 @@
 import { MarketPair } from "@/types/types";
-import { useTranslations } from "next-intl";
 
 export const categories = [
   'Crypto',
@@ -17,14 +16,14 @@ export const categories = [
 export const firstMenuItems = [
   {
     name: "Home",
-    href: "/dashboard",
-    icon: "/sidebarHome.svg",
+    href: "/home",
+    icon: "/sidebarBuyCrypto.svg",
     dropdown: false,
   },
   {
     name: "Buy Crypto",
     href: "/dashboard/1",
-    icon: "/sidebarBuyCrypto.svg",
+    icon: "/sidebarHome.svg",
     dropdown: false,
   },
   {

@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import { changeUserPassword } from "@/firebase/firebaseService";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -13,6 +14,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = useTranslations();
 
   const pathname = usePathname();
   const cleanPath = pathname.split("/").slice(2).join("/");
@@ -83,7 +85,7 @@ export default function ProfilePage() {
                   href="/settings/wallet"
                 >
                   <Image src="/user.svg" alt="wallet" width={24} height={24} />
-                  Wallet
+                  {t("Wallet")}
                 </a>
               </li>
               <li className="nav-item mb-2 w-75">
@@ -101,7 +103,7 @@ export default function ProfilePage() {
                     width={24}
                     height={24}
                   />
-                  Change Password
+                  {t("Change Password")}
                 </a>
               </li>
             </ul>
@@ -109,10 +111,10 @@ export default function ProfilePage() {
         </div>
 
         <div
-          className="col-md-9 p-4 p-md-5 d-flex align-items-center justify-content-center flex-column gap-4 bg-white"
+          className="col-md-9 p-4 p-md-5 d-flex align-items-start justify-content-start flex-column gap-4 bg-white"
           style={{ minHeight: "50vh" }}
         >
-          <h3 className="fs-1 fw-bold">Change Password</h3>
+          <h3 className="fs-1 fw-bold">{t("Change Password")}</h3>
 
           <form
             onSubmit={handleChangePassword}
@@ -120,13 +122,13 @@ export default function ProfilePage() {
           >
             <div>
               <label htmlFor="newPassword" className="form-label">
-                New Password
+                {t("New Password")}
               </label>
               <input
                 type="password"
                 className="form-control"
                 id="newPassword"
-                placeholder="Enter new password"
+                placeholder={t("Enter new password")}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
@@ -140,7 +142,7 @@ export default function ProfilePage() {
                 type="password"
                 className="form-control"
                 id="confirmPassword"
-                placeholder="Confirm new password"
+                placeholder={t("Confirm new password")}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -151,7 +153,7 @@ export default function ProfilePage() {
               className="btn-primary text-white fs-4"
               disabled={loading}
             >
-              {loading ? "Updating..." : "Update Password"}
+              {loading ? t("pending") : t("Update Password")}
             </Button>
             {message && (
               <div className="alert alert-info mt-1 w-100">{message}</div>
