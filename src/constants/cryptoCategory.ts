@@ -22,7 +22,7 @@ export const firstMenuItems = [
   },
   {
     name: "Buy Crypto",
-    href: "/dashboard/1",
+    href: "/dashboard",
     icon: "/sidebarHome.svg",
     dropdown: false,
   },

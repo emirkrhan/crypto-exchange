@@ -47,7 +47,7 @@ export default function Register() {
       setSuccessMsg("");
       try {
         setLoading(true);
-        const res = await registerUser(
+        await registerUser(
           values.email,
           values.password,
           values.nickname,

@@ -27,7 +27,7 @@ export const registerUser = async (
     );
 
     const user = userCredential.user;
-    console.log("✅ Kullanıcı kaydedildi:", user.uid);
+    console.log("Kullanıcı kaydedildi:", user.uid);
 
     await setDoc(doc(db, "users", user.uid), {
       uid: user.uid,
@@ -55,9 +55,9 @@ export const registerUser = async (
     };
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error("❌ Firebase kayıt hatası:", error.message);
+      console.error("Firebase kayıt hatası:", error.message);
     } else {
-      console.error("❌ Firebase kayıt hatası: Bilinmeyen bir hata oluştu.", error);
+      console.error("Firebase kayıt hatası: Bilinmeyen bir hata oluştu.", error);
     }
     throw error;
   }
